@@ -5,7 +5,7 @@
   "description": "Production-like AWS SAM serverless backend with TypeScript and PostgreSQL",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon --exec \"ts-node --files\" src/server.ts",
     "build": "tsc -p tsconfig.json",
     "start": "sam local start-api",
     "start:local": "ts-node --files src/server.ts",
