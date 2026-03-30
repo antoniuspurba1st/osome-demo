@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 
 import { getHealthHandler } from "./handlers/health";
 import { getReadyHandler } from "./handlers/ready";
-import { createUserHandler, listUsersHandler } from "./handlers/users";
+import { createUserHandler, listUsersHandler, updateUserStatusHandler } from "./handlers/users";
 import { env } from "./config/env";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler";
 import { requestContextMiddleware, requestLoggingMiddleware } from "./middleware/logger";
@@ -44,6 +44,7 @@ export const createApp = () => {
   app.get("/ready", getReadyHandler);
   app.get("/users", listUsersHandler);
   app.post("/users", createUserHandler);
+  app.patch("/users/:id/status", updateUserStatusHandler);
 
   app.use(notFoundHandler);
   app.use(errorHandler);

@@ -83,6 +83,11 @@ Resources:
           Properties:
             Path: /users
             Method: post
+        UsersStatusApi:
+          Type: Api
+          Properties:
+            Path: /users/{id}/status
+            Method: patch
     Metadata:
       BuildMethod: esbuild
       BuildProperties:

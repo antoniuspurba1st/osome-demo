@@ -8,10 +8,11 @@ export const notFoundHandler: RequestHandler = (request, _response, next) => {
 
 export const errorHandler: ErrorRequestHandler = (error, request, response, _next) => {
   const statusCode =
-    error instanceof HttpError ? error.statusCode : typeof error?.status === "number" ? error.status : 500;
-  const message = error instanceof Error ? error.message : "Internal server error";
+    error instanceof HttpError ? error.statusCode : typeof error?.statusCode === "number" ? error.statusCode : 500;
+  const message =
+    error instanceof Error ? error.message : typeof error?.message === "string" ? error.message : "Internal server error";
 
-  request.log.error(
+  request.log?.error(
     {
       err: error,
       method: request.method,
@@ -22,7 +23,7 @@ export const errorHandler: ErrorRequestHandler = (error, request, response, _nex
   );
 
   response.status(statusCode).json({
-    error: statusCode === 500 ? "Internal server error" : message,
+    error: message,
     requestId: request.requestId,
   });
 };
